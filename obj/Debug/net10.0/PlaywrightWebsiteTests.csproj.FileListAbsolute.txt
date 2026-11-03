@@ -591,3 +591,4 @@ c:\Users\m.butijn\OneDrive\PlaywrightWebsiteTests\PlaywrightCarwiseWebsite\obj\D
 c:\Users\m.butijn\OneDrive\PlaywrightWebsiteTests\PlaywrightCarwiseWebsite\obj\Debug\net10.0\PlaywrightWebsiteTests.genruntimeconfig.cache
 c:\Users\m.butijn\OneDrive\PlaywrightWebsiteTests\PlaywrightCarwiseWebsite\obj\Debug\net10.0\ref\PlaywrightWebsiteTests.dll
 C:\Users\m.butijn\OneDrive\PlaywrightWebsiteTests\PlaywrightCarwiseWebsite\obj\Debug\net10.0\PlaywrightWebsiteTests.sourcelink.json
+C:\Users\m.butijn\OneDrive\PlaywrightWebsiteTests\PlaywrightCarwiseWebsite\bin\Debug\net10.0\resources\testData.json

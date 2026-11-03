@@ -15,4 +15,10 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+  <None Update="resources\testData.json">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </None>
+</ItemGroup>
+
 </Project>
