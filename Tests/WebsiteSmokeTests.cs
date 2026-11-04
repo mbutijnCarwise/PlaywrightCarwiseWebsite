@@ -58,12 +58,13 @@ public class WebsiteSmokeTests : PageTest
         await AcceptCookieBannerIfPresent(); // Accept the cookie banner if it appears
         await ClickOnContactLink(); // Click on the "Neem contact op" link to navigate to the contact page
 
+        if (_page is null)
+            throw new InvalidOperationException("Page is not initialized.");
         ILocator contactHeader = _page.GetByRole(AriaRole.Heading, new() { Name = "Neem contact op met CarWise Group" });
         Assert.That(await contactHeader.TextContentAsync(), Is.Not.Empty, "The contact header should not be empty.");
 
         // Test the Carano page
-        // await page.GetByText("Ontdek meer").ClickAsync();
-        ILocator caranoLink = _page.Locator("xpath=//*[@id=\"main\"]/section[2]/div/div/div[1]/div/div[1]/div[3]/a/div/div[1]");
+        ILocator caranoLink = _page.GetByRole(AriaRole.Link, new() { Name = "Ontdek meer" }).First;
         await caranoLink.ScrollIntoViewIfNeededAsync();
         await caranoLink.ClickAsync();
 
@@ -84,38 +85,37 @@ public class WebsiteSmokeTests : PageTest
         await ClickOnContactLink();
 
         // Fill in the textfields on the contact page
-        ILocator firstNameField = _page.Locator("xpath=/html/body/div[3]/main/section[2]/div/div/div[2]/div/div[2]/form/div[2]/div/div[1]/div/input");
-        ILocator lastNameField = _page.Locator("xpath=/html/body/div[3]/main/section[2]/div/div/div[2]/div/div[2]/form/div[2]/div/div[2]/div/input");
-        ILocator emailField = _page.Locator("xpath=/html/body/div[3]/main/section[2]/div/div/div[2]/div/div[2]/form/div[2]/div/div[3]/div/input");
+        if (_page is null)
+            throw new InvalidOperationException("Page is not initialized.");
+        ILocator firstNameField = _page.GetByLabel("Voornaam");
+        ILocator lastNameField = _page.GetByLabel("Achternaam");
+        ILocator emailField = _page.GetByLabel("Werk-e-mailadres");
 
-        if (firstNameField is null || lastNameField is null || emailField is null) {
+        if (firstNameField is null || lastNameField is null || emailField is null) 
             throw new Exception("One or more textfields could not be found on the contact page.");
-        }
 
-        firstNameField.ScrollIntoViewIfNeededAsync().Wait();
-        firstNameField.FillAsync(firstName).Wait();
-        lastNameField.FillAsync(lastName).Wait();
-        emailField.FillAsync(email).Wait();
+        await firstNameField.ScrollIntoViewIfNeededAsync();
+        await firstNameField.FillAsync(firstName);
+        await lastNameField.FillAsync(lastName);
+        await emailField.FillAsync(email);
     }
 
     public async Task AcceptCookieBannerIfPresent()
     {
         if (_page is null)
             return;
-
-        ILocator acceptButton = _page.Locator("xpath=//*[@id=\"cmplz-cookiebanner-1-optin\"]/div[6]/button[1]");
-        if (acceptButton.IsVisibleAsync().Result)
-        {
+        ILocator acceptButton = _page.GetByRole(AriaRole.Button, new() { Name = "Accepteren" });
+        //if (await acceptButton.IsVisibleAsync())
             await acceptButton.ClickAsync();
-        }
     }
 
     public async Task ClickOnContactLink()
     {
         if (_page is null)
             return;
-
         ILocator contactLink = _page.Locator("xpath=//*[@id=\"main\"]/section[1]/div/div/div/a[1]/div/div[1]/span");
+        //ILocator contactLink = _page.GetByLabel("Neem contact op");
+        //ILocator contactLink = _page.GetByRole(AriaRole.Button, new() { Name = "Neem contact op" });
         await contactLink.ClickAsync();
     }
 
