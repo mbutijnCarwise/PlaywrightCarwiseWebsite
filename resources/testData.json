@@ -2,11 +2,15 @@
   {
 	  "firstName": "Pietje",
 	  "lastName": "Puk",
-	  "email": "pietjepuk@carwise.nl"
+	  "email": "pietjepuk@carwise.nl",
+	  "numberVehicles": 100,
+	  "solutions": ["Wagenparkbeheer", "Autodelen voor bedrijven"]
   },
   {
 	  "firstName": "Klaas",
 	  "lastName": "Vaak",
-	  "email": "klaasvaak@carwise.nl"
+	  "email": "klaasvaak@carwise.nl",
+	  "numberVehicles": 2000,
+	  "solutions": ["Leasingsoftware", "Software voor autoverhuur"]
   }
 ]
